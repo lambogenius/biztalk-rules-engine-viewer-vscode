@@ -7,7 +7,8 @@ A local-first, read-only VS Code custom editor for exported BizTalk Business Rul
 ## Features
 
 - Opens exported `.xml` and `.brl` policy files through **Open With...**.
-- Lists policies and versions contained in an export.
+- Lists policies and versions contained in an export, with who last changed each policy and when (from the BRL `<version>` element).
+- Reads BRL conditions as `Total > 1000 AND Region = "East"`, using each field's alias.
 - Presents each rule as readable IF/THEN sections.
 - Shows rule priority and active status.
 - Filters rules across names, conditions, and actions.

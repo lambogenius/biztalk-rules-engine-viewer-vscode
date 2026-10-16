@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Self-written test file in the BRL export format, with made-up names. -->
+<brl xmlns="http://schemas.microsoft.com/businessruleslanguage/2002">
+  <ruleset name="OrderDiscounts">
+    <version major="1" minor="2" description="" modifiedby="CONTOSO\rules.admin" date="2024-03-05T10:15:00.0000000-05:00" />
+    <configuration />
+    <bindings>
+      <xmldocument ref="xml_0" doctype="Orders.Order" instances="16" selectivity="1" instance="0">
+        <selector>/*[local-name()='Order']</selector>
+        <selectoralias>/Order</selectoralias>
+        <schema>Order.xsd</schema>
+      </xmldocument>
+    </bindings>
+    <rule name="LargeOrderDiscount" priority="10" active="true">
+      <if>
+        <and>
+          <compare operator="greater than">
+            <vocabularylink uri="3f0e9bcc-0000-0000-0000-000000000001" element="b1b1b1b1-0000-0000-0000-000000000002" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_0" type="decimal" sideeffects="false">
+                  <field>*[local-name()='Total']</field>
+                  <fieldalias>Total</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <decimal>1000</decimal>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="equal">
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_0" type="string" sideeffects="false">
+                  <field>*[local-name()='Region']</field>
+                  <fieldalias>Region</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>East</string>
+              </constant>
+            </rhs>
+          </compare>
+        </and>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_0" type="decimal" sideeffects="true">
+            <field>*[local-name()='Discount']</field>
+            <fieldalias>Discount</fieldalias>
+            <argument>
+              <constant>
+                <decimal>0.05</decimal>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+    <rule name="RetiredPromotion" priority="0" active="false">
+      <if>
+        <compare operator="less than">
+          <lhs>
+            <function>
+              <xmldocumentmember xmldocumentref="xml_0" type="decimal" sideeffects="false">
+                <field>*[local-name()='Total']</field>
+                <fieldalias>Total</fieldalias>
+              </xmldocumentmember>
+            </function>
+          </lhs>
+          <rhs>
+            <constant>
+              <decimal>50</decimal>
+            </constant>
+          </rhs>
+        </compare>
+      </if>
+      <then />
+    </rule>
+  </ruleset>
+</brl>
