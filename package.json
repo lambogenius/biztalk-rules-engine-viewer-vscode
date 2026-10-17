@@ -2,28 +2,66 @@
   "name": "biztalk-rules-engine-viewer",
   "displayName": "BizTalk Rules Engine Viewer",
   "description": "Inspect exported BizTalk Business Rules Engine policies in VS Code.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "lambogenius",
-  "license": "MIT",
-  "engines": { "vscode": "^1.85.0" },
-  "categories": ["Visualization"],
-  "main": "extension.cjs",
-  "activationEvents": ["onCustomEditor:biztalkRulesViewer.editor", "onCommand:biztalkRulesViewer.open"],
-  "contributes": {
-    "commands": [{ "command": "biztalkRulesViewer.open", "title": "BizTalk: Open Rules Engine Viewer" }],
-    "customEditors": [{
-      "viewType": "biztalkRulesViewer.editor",
-      "displayName": "BizTalk Rules Engine Viewer",
-      "selector": [{ "filenamePattern": "*.brl" }, { "filenamePattern": "*.xml" }],
-      "priority": "option"
-    }]
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lambogenius/biztalk-rules-engine-viewer-vscode.git"
   },
-  "files": ["extension.cjs", "media/**", "README.md", "LICENSE"],
+  "homepage": "https://github.com/lambogenius/biztalk-rules-engine-viewer-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/lambogenius/biztalk-rules-engine-viewer-vscode/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "main": "extension.cjs",
+  "activationEvents": [
+    "onCustomEditor:biztalkRulesViewer.editor",
+    "onCommand:biztalkRulesViewer.open"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "biztalkRulesViewer.open",
+        "title": "BizTalk: Open Rules Engine Viewer"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "biztalkRulesViewer.editor",
+        "displayName": "BizTalk Rules Engine Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.brl"
+          },
+          {
+            "filenamePattern": "*.xml"
+          }
+        ],
+        "priority": "option"
+      }
+    ]
+  },
+  "files": [
+    "extension.cjs",
+    "media/**",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "npm test && npm run package:vsix",
     "test": "node --test",
     "prepackage:vsix": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\"",
     "package:vsix": "npx @vscode/vsce package --allow-missing-repository --out artifacts/biztalk-rules-engine-viewer.vsix",
     "reinstall": "npm run build && code --install-extension artifacts/biztalk-rules-engine-viewer.vsix --force"
+  },
+  "devDependencies": {
+    "@xmldom/xmldom": "^0.8.10"
   }
 }

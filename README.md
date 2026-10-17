@@ -1,11 +1,14 @@
 # BizTalk Rules Engine Viewer
 
+[![Source on GitHub](https://img.shields.io/badge/source-GitHub-181717?logo=github)](https://github.com/lambogenius/biztalk-rules-engine-viewer-vscode)
+
 A local-first, read-only VS Code custom editor for exported BizTalk Business Rules Engine policy XML.
 
 ## Features
 
 - Opens exported `.xml` and `.brl` policy files through **Open With...**.
-- Lists policies and versions contained in an export.
+- Lists policies and versions contained in an export, with who last changed each policy and when (from the BRL `<version>` element).
+- Reads BRL conditions as `Total > 1000 AND Region = "East"`, using each field's alias.
 - Presents each rule as readable IF/THEN sections.
 - Shows rule priority and active status.
 - Filters rules across names, conditions, and actions.
@@ -15,6 +18,8 @@ A local-first, read-only VS Code custom editor for exported BizTalk Business Rul
 The first release reads exported policy files. Direct SQL Rule Store access, vocabulary browsing, policy execution, and deployment are outside the initial read-only scope.
 
 ## Install locally
+
+Source code: [GitHub repository](https://github.com/lambogenius/biztalk-rules-engine-viewer-vscode)
 
 ```powershell
 npm run build
